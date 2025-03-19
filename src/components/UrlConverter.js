@@ -47,7 +47,7 @@ const UrlConverter = () => {
         <Col md={8} lg={6}>
           <Card>
             <Card.Header>
-              <h3 className="text-center">Kambria URL Converter</h3>
+              <h1 className="text-center">Kambria URL Converter</h1>
             </Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit}>
