@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert, Card, InputGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Alert,
+  Card,
+  InputGroup,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLink,
@@ -41,6 +50,13 @@ const RomanizeTool = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleResultChange = (e) => {
+    const newText = e.target.value;
+    setRomanizedText(newText);
+    setCharCount(newText.length);
+    setCopied(false);
+  };
+
   return (
     <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card>
@@ -62,7 +78,6 @@ const RomanizeTool = () => {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder="Enter text here"
-                autoFocus
               />
               <Button variant="primary" type="submit" className="w-100 mt-2">
                 <FontAwesomeIcon icon={faMagic} className="me-2" />
@@ -86,8 +101,15 @@ const RomanizeTool = () => {
                   Result:
                 </h5>
                 <InputGroup>
-                  <Form.Control type="text" value={romanizedText} readOnly />
-                  <OverlayTrigger placement="top" overlay={<Tooltip>{copied ? "Copied!" : "Copy"}</Tooltip>}>
+                  <Form.Control
+                    type="text"
+                    value={romanizedText}
+                    onChange={handleResultChange}
+                  />
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>{copied ? "Copied!" : "Copy"}</Tooltip>}
+                  >
                     <Button variant="outline-secondary" onClick={handleCopy}>
                       <FontAwesomeIcon icon={copied ? faCheck : faCopy} />
                     </Button>

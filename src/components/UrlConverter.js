@@ -16,7 +16,7 @@ import {
   faLink,
   faArrowRight,
   faList,
-  faExternalLinkAlt, // Added new icon for external link
+  faExternalLinkAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { romanizeString } from "./utils";
 
@@ -63,6 +63,11 @@ const UrlConverter = () => {
     window.open(convertedUrl, "_blank", "noopener,noreferrer");
   };
 
+  const handleResultChange = (e) => {
+    setConvertedUrl(e.target.value);
+    setCopied(false);
+  };
+
   return (
     <Container className="pt-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card>
@@ -97,7 +102,11 @@ const UrlConverter = () => {
             <Card className="mt-3">
               <Card.Body>
                 <InputGroup>
-                  <Form.Control type="text" value={convertedUrl} readOnly />
+                  <Form.Control
+                    type="text"
+                    value={convertedUrl}
+                    onChange={handleResultChange}
+                  />
                   <OverlayTrigger
                     placement="top"
                     overlay={<Tooltip>{copied ? "Copied!" : "Copy"}</Tooltip>}
@@ -135,12 +144,12 @@ const UrlConverter = () => {
               </h5>
               <ul>
                 <li>
-                  https://cday.kambria.io/knth-tin-tuc →
-                  https://knth.cday.global/tin-tuc
+                  https://cday.kambria.io/knth-<strong>tin-tuc</strong> →
+                  https://knth.cday.global/<strong>tin-tuc</strong>
                 </li>
                 <li>
-                  https://cday.kambria.io/cdcg-news →
-                  https://cdcg.cday.global/news
+                  https://cday.kambria.io/cdcg-<strong>news</strong> →
+                  https://cdcg.cday.global/<strong>news</strong>
                 </li>
               </ul>
             </Card.Body>
