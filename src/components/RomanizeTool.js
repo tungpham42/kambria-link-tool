@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert, Card, InputGroup } from "react-bootstrap";
+import { Container, Form, Button, Alert, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLink,
@@ -56,19 +56,17 @@ const RomanizeTool = () => {
                 <FontAwesomeIcon icon={faKeyboard} className="me-2" />
                 Input the text:
               </Form.Label>
-              <InputGroup>
-                <Form.Control
-                  type="text"
-                  value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
-                  placeholder="Enter text here"
-                  autoFocus
-                />
-                <Button variant="primary" type="submit" className="w-100 mt-2">
-                  <FontAwesomeIcon icon={faMagic} className="me-2" />
-                  Convert to Slug
-                </Button>
-              </InputGroup>
+              <Form.Control
+                type="text"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                placeholder="Enter text here"
+                autoFocus
+              />
+              <Button variant="primary" type="submit" className="w-100 mt-2">
+                <FontAwesomeIcon icon={faMagic} className="me-2" />
+                Convert to Slug
+              </Button>
             </Form.Group>
           </Form>
 
