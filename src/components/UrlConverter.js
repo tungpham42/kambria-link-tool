@@ -6,7 +6,6 @@ import {
   Card,
   OverlayTrigger,
   Tooltip,
-  InputGroup,
   Alert,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -73,19 +72,17 @@ const UrlConverter = () => {
                 <FontAwesomeIcon icon={faLink} className="me-2" />
                 Enter URL:
               </Form.Label>
-              <InputGroup>
-                <Form.Control
-                  type="text"
-                  placeholder="e.g. https://cday.kambria.io/cdcg-news"
-                  value={inputUrl}
-                  onChange={(e) => setInputUrl(e.target.value)}
-                  autoFocus
-                />
-                <Button variant="primary" type="submit" className=w-100 mt-2">
-                  <FontAwesomeIcon icon={faArrowRight} className="me-2" />
-                  Convert URL
-                </Button>
-              </InputGroup>
+              <Form.Control
+                type="text"
+                placeholder="e.g. https://cday.kambria.io/cdcg-news"
+                value={inputUrl}
+                onChange={(e) => setInputUrl(e.target.value)}
+                autoFocus
+              />
+              <Button variant="primary" type="submit" className=w-100 mt-2">
+                <FontAwesomeIcon icon={faArrowRight} className="me-2" />
+                Convert URL
+              </Button>
             </Form.Group>
           </Form>
 
