@@ -62,7 +62,7 @@ const RomanizeTool = () => {
     <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <h2 className="mb-4">
         <FontAwesomeIcon icon={faLink} className="me-2" />
-        URL tool
+        Slug tool
       </h2>
 
       <Form onSubmit={handleSubmit}>
@@ -122,7 +122,7 @@ const RomanizeTool = () => {
 
       <div className="mt-4">
         <h5>
-          <FontAwesomeIcon icon={faList} className="me-2" /> Ví dụ:
+          <FontAwesomeIcon icon={faList} className="me-2" />Examples:
         </h5>
         <ul>
           <li>"Xin chào!" → "xin-chao" (8 ký tự)</li>
