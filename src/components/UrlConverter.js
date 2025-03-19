@@ -74,9 +74,9 @@ const UrlConverter = () => {
   };
 
   return (
-    <Container className="pt-5 col-lg-10 col-md-10 col-sm-10 col-12">
+    <Container className="pt-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Row className="justify-content-center">
-        <Col md={8} lg={6}>
+        <Col>
           <Card>
             <Card.Header>
               {/* Heading with Font Awesome icon */}
