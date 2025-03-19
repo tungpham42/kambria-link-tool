@@ -59,7 +59,7 @@ const RomanizeTool = () => {
 
   return (
     <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
-      <Card>
+      <Card className="shadow-lg rounded">
         <Card.Header>
           <h2 className="text-center">
             <FontAwesomeIcon icon={faLink} className="me-2" />
@@ -94,8 +94,8 @@ const RomanizeTool = () => {
           )}
 
           {romanizedText && (
-            <Card className="mt-3">
-              <Card.Body>
+            <Card className="mt-3 p-0">
+              <Card.Body className="p-0">
                 <h5>
                   <FontAwesomeIcon icon={faCheckCircle} className="me-2" />
                   Result:
