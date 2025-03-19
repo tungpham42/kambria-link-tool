@@ -1,14 +1,32 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Card, Row, Col } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Card,
+  Row,
+  Col,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
+
+// Font Awesome imports
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCopy,
+  faCheck,
+  faLink,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const UrlConverter = () => {
   const [inputUrl, setInputUrl] = useState("");
   const [convertedUrl, setConvertedUrl] = useState("");
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const convertUrl = (url) => {
     try {
-      // Check if URL matches the expected pattern with specific prefixes
       const urlPattern = /^https:\/\/cday\.kambria\.io\/(knth|cdcg)-(.*)$/;
       const matches = url.match(urlPattern);
 
@@ -19,10 +37,7 @@ const UrlConverter = () => {
       }
 
       const [, prefix, content] = matches;
-
-      // Construct new URL
-      const newUrl = `https://${prefix}.cday.global/${content}`;
-      return newUrl;
+      return `https://${prefix}.cday.global/${content}`;
     } catch (err) {
       throw new Error(err.message);
     }
@@ -32,6 +47,7 @@ const UrlConverter = () => {
     e.preventDefault();
     setError("");
     setConvertedUrl("");
+    setCopied(false);
 
     try {
       const result = convertUrl(inputUrl.trim());
@@ -41,20 +57,32 @@ const UrlConverter = () => {
     }
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(convertedUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <Container className="py-5 col-lg-10 col-md-10 col-sm-10 col-12">
+    <Container className="pt-5 col-lg-10 col-md-10 col-sm-10 col-12">
       <Row className="justify-content-center">
         <Col md={8} lg={6}>
           <Card>
             <Card.Header>
+              {/* Heading with Font Awesome icon */}
               <h1 className="text-center">Kambria URL Converter</h1>
             </Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="urlInput">
-                  <Form.Label>Enter URL to convert</Form.Label>
+                  {/* Label with Font Awesome icon */}
+                  <Form.Label>
+                    <FontAwesomeIcon icon={faLink} className="me-2" />
+                    Enter URL to convert
+                  </Form.Label>
                   <Form.Control
                     type="text"
+                    autoFocus
                     placeholder="e.g. https://cday.kambria.io/cdcg-news"
                     value={inputUrl}
                     onChange={(e) => setInputUrl(e.target.value)}
@@ -65,7 +93,9 @@ const UrlConverter = () => {
                 </Form.Group>
 
                 <div className="d-grid gap-2">
+                  {/* Button with Font Awesome icon */}
                   <Button variant="primary" type="submit">
+                    <FontAwesomeIcon icon={faArrowRight} className="me-2" />
                     Convert URL
                   </Button>
                 </div>
@@ -74,16 +104,40 @@ const UrlConverter = () => {
               {convertedUrl && (
                 <Card className="mt-4">
                   <Card.Body>
-                    <h5>Converted URL:</h5>
-                    <p className="text-success">
-                      <a
-                        href={convertedUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>
+                        <h5>Converted URL:</h5>
+                        <p className="text-success mb-0">
+                          <a
+                            href={convertedUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {convertedUrl}
+                          </a>
+                        </p>
+                      </div>
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={
+                          <Tooltip>
+                            {copied ? "Copied!" : "Copy to clipboard"}
+                          </Tooltip>
+                        }
                       >
-                        {convertedUrl}
-                      </a>
-                    </p>
+                        <Button
+                          variant="outline-secondary"
+                          size="sm"
+                          onClick={handleCopy}
+                          className="ms-2"
+                        >
+                          <FontAwesomeIcon
+                            icon={copied ? faCheck : faCopy}
+                            className={copied ? "text-success" : ""}
+                          />
+                        </Button>
+                      </OverlayTrigger>
+                    </div>
                   </Card.Body>
                 </Card>
               )}
@@ -103,4 +157,5 @@ const UrlConverter = () => {
     </Container>
   );
 };
+
 export default UrlConverter;
