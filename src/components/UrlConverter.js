@@ -18,6 +18,7 @@ import {
   faList,
   faExternalLinkAlt,
   faCheckCircle,
+  faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { romanizeString } from "./utils";
 
@@ -138,11 +139,12 @@ const UrlConverter = () => {
 
           {error && (
             <Alert variant="danger" className="mt-3">
+              <FontAwesomeIcon icon={faCircleExclamation} className="me-2" />
               {error}
             </Alert>
           )}
           <Card className="mt-4">
-            <Card.Body>
+            <Card.Body className="p-0">
               <h5>
                 <FontAwesomeIcon icon={faList} className="me-2" />
                 Examples:

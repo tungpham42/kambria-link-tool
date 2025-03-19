@@ -122,8 +122,8 @@ const RomanizeTool = () => {
             </Card>
           )}
 
-          <Card className="mt-4">
-            <Card.Body>
+          <Card className="mt-3">
+            <Card.Body className="p-0">
               <h5>
                 <FontAwesomeIcon icon={faList} className="me-2" />
                 Examples:
