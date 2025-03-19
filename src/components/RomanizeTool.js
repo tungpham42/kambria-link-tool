@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert, Card, InputGroup } from "react-bootstrap";
+import { Container, Form, Button, Alert, Card, InputGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLink,
@@ -7,6 +7,7 @@ import {
   faMagic,
   faCheckCircle,
   faCopy,
+  faCheck,
   faCircleExclamation,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
@@ -86,10 +87,11 @@ const RomanizeTool = () => {
                 </h5>
                 <InputGroup>
                   <Form.Control type="text" value={romanizedText} readOnly />
-                  <Button variant={copied ? "success" : "outline-success"} onClick={handleCopy}>
-                    <FontAwesomeIcon icon={faCopy} className="me-2" />
-                    {copied ? "Copied" : "Copy"}
-                  </Button>
+                  <OverlayTrigger placement="top" overlay={<Tooltip>{copied ? "Copied!" : "Copy"}</Tooltip>}>
+                    <Button variant="outline-secondary" onClick={handleCopy}>
+                      <FontAwesomeIcon icon={copied ? faCheck : faCopy} />
+                    </Button>
+                  </OverlayTrigger>
                 </InputGroup>
                 <p className="mt-2">
                   Character count: <strong>{charCount}</strong>
