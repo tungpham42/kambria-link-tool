@@ -9,6 +9,7 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+import { transliterate } from "transliteration";
 
 // Font Awesome imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,6 +26,15 @@ const UrlConverter = () => {
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
 
+  const romanizeString = (str) => {
+    return transliterate(str)
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+  };
+
   const convertUrl = (url) => {
     try {
       const urlPattern = /^https:\/\/cday\.kambria\.io\/(knth|cdcg)-(.*)$/;
@@ -37,7 +47,7 @@ const UrlConverter = () => {
       }
 
       const [, prefix, content] = matches;
-      return `https://${prefix}.cday.global/${content}`;
+      return `https://${prefix}.cday.global/${romanizeString(content)}`;
     } catch (err) {
       throw new Error(err.message);
     }
