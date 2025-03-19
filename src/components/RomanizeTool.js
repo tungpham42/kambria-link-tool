@@ -45,7 +45,7 @@ const RomanizeTool = () => {
     <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card>
         <Card.Header>
-          <h2>
+          <h2 className="text-center">
             <FontAwesomeIcon icon={faLink} className="me-2" />
             Slug Tool
           </h2>
