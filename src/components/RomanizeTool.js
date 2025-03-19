@@ -73,16 +73,15 @@ const RomanizeTool = () => {
           </Form.Label>
           <InputGroup>
             <Form.Control
-              size="lg"
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Text here"
               autoFocus
             />
-            <Button size="lg" variant="primary" type="submit">
+            <Button variant="primary" type="submit">
               <FontAwesomeIcon icon={faMagic} className="me-2" />
-              Convert to URL
+              Convert to slug
             </Button>
           </InputGroup>
         </Form.Group>
@@ -103,13 +102,11 @@ const RomanizeTool = () => {
           </h5>
           <InputGroup>
             <Form.Control
-              size="lg"
               type="text"
               value={romanizedText}
               onChange={handleResultChange} // Add onChange handler
             />
             <Button
-              size="lg"
               variant={copied ? "success" : "outline-success"}
               onClick={handleCopy}
             >
