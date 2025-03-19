@@ -64,7 +64,7 @@ const RomanizeTool = () => {
                   placeholder="Enter text here"
                   autoFocus
                 />
-                <Button variant="primary" type="submit" className="w-100">
+                <Button variant="primary" type="submit" className="w-100 mt-2">
                   <FontAwesomeIcon icon={faMagic} className="me-2" />
                   Convert to Slug
                 </Button>
