@@ -81,7 +81,7 @@ const UrlConverter = () => {
                   onChange={(e) => setInputUrl(e.target.value)}
                   autoFocus
                 />
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" className=w-100 mt-2">
                   <FontAwesomeIcon icon={faArrowRight} className="me-2" />
                   Convert URL
                 </Button>
