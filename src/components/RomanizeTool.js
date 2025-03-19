@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Container, Card, Form, Button, InputGroup, Alert } from "react-bootstrap";
-import { transliterate } from "transliteration";
+import { Container, Form, Button, InputGroup, Alert, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLink,
@@ -11,6 +10,7 @@ import {
   faCircleExclamation,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
+import { romanizeString } from "./utils";
 
 const RomanizeTool = () => {
   const [inputText, setInputText] = useState("");
@@ -18,14 +18,6 @@ const RomanizeTool = () => {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
   const [charCount, setCharCount] = useState(0);
-
-  const romanizeString = (str) =>
-    transliterate(str)
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,22 +40,16 @@ const RomanizeTool = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleResultChange = (e) => {
-    const newText = e.target.value;
-    setRomanizedText(newText);
-    setCharCount(newText.length);
-    setCopied(false);
-  };
-
   return (
-    <Container className="my-5 col-lg-8 col-md-10 col-sm-12">
-      <Card className="shadow-lg">
-        <Card.Body>
-          <h2 className="mb-4 text-center">
+    <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
+      <Card>
+        <Card.Header>
+          <h2>
             <FontAwesomeIcon icon={faLink} className="me-2" />
             Slug Tool
           </h2>
-
+        </Card.Header>
+        <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label className="h5">
@@ -75,12 +61,12 @@ const RomanizeTool = () => {
                   type="text"
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
-                  placeholder="Text here"
+                  placeholder="Enter text here"
                   autoFocus
                 />
                 <Button variant="primary" type="submit">
                   <FontAwesomeIcon icon={faMagic} className="me-2" />
-                  Convert to slug
+                  Convert to Slug
                 </Button>
               </InputGroup>
             </Form.Group>
@@ -93,38 +79,45 @@ const RomanizeTool = () => {
             </Alert>
           )}
 
-          {romanizedText && !error && (
-            <div className="mt-3">
-              <h5>
-                <FontAwesomeIcon icon={faCheckCircle} className="me-2" />
-                Result:
-              </h5>
-              <InputGroup>
-                <Form.Control type="text" value={romanizedText} onChange={handleResultChange} />
-                <Button variant={copied ? "success" : "outline-success"} onClick={handleCopy}>
-                  <FontAwesomeIcon icon={faCopy} className="me-2" />
-                  {copied ? "Copied" : "Copy"}
-                </Button>
-              </InputGroup>
-              <p className="mt-2">
-                Characters count: <strong>{charCount}</strong>
-              </p>
-            </div>
+          {romanizedText && (
+            <Card className="mt-3">
+              <Card.Body>
+                <h5>
+                  <FontAwesomeIcon icon={faCheckCircle} className="me-2" />
+                  Result:
+                </h5>
+                <InputGroup>
+                  <Form.Control type="text" value={romanizedText} readOnly />
+                  <Button
+                    variant={copied ? "success" : "outline-success"}
+                    onClick={handleCopy}
+                  >
+                    <FontAwesomeIcon icon={faCopy} className="me-2" />
+                    {copied ? "Copied" : "Copy"}
+                  </Button>
+                </InputGroup>
+                <p className="mt-2">
+                  Character count: <strong>{charCount}</strong>
+                </p>
+              </Card.Body>
+            </Card>
           )}
 
-          <div className="mt-4">
-            <h5>
-              <FontAwesomeIcon icon={faList} className="me-2" />
-              Examples:
-            </h5>
-            <ul>
-              <li>"Xin chào!" → "xin-chao" (8 ký tự)</li>
-              <li>"Hello World!" → "hello-world" (11 ký tự)</li>
-              <li>"This & That" → "this-that" (9 ký tự)</li>
-              <li>"Café Olé" → "cafe-ole" (8 ký tự)</li>
-              <li>"Multiple Spaces" → "multiple-spaces" (15 ký tự)</li>
-            </ul>
-          </div>
+          <Card className="mt-4">
+            <Card.Body>
+              <h5>
+                <FontAwesomeIcon icon={faList} className="me-2" />
+                Examples:
+              </h5>
+              <ul>
+                <li>"Xin chào!" → "xin-chao" (8 characters)</li>
+                <li>"Hello World!" → "hello-world" (11 characters)</li>
+                <li>"This & That" → "this-that" (9 characters)</li>
+                <li>"Café Olé" → "cafe-ole" (8 characters)</li>
+                <li>"Multiple Spaces" → "multiple-spaces" (15 characters)</li>
+              </ul>
+            </Card.Body>
+          </Card>
         </Card.Body>
       </Card>
     </Container>
