@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert, Card } from "react-bootstrap";
+import { Container, Form, Button, Alert, Card, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLink,
@@ -56,18 +56,20 @@ const RomanizeTool = () => {
                 <FontAwesomeIcon icon={faKeyboard} className="me-2" />
                 Input the text:
               </Form.Label>
-              <Form.Control
-                type="text"
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder="Enter text here"
-                autoFocus
-              />
+              <InputGroup>
+                <Form.Control
+                  type="text"
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  placeholder="Enter text here"
+                  autoFocus
+                />
+              </InputGroup>
+              <Button variant="primary" type="submit" className="w-100">
+                <FontAwesomeIcon icon={faMagic} className="me-2" />
+                Convert to Slug
+              </Button>
             </Form.Group>
-            <Button variant="primary" type="submit">
-              <FontAwesomeIcon icon={faMagic} className="me-2" />
-              Convert to Slug
-            </Button>
           </Form>
 
           {error && (
@@ -84,14 +86,13 @@ const RomanizeTool = () => {
                   <FontAwesomeIcon icon={faCheckCircle} className="me-2" />
                   Result:
                 </h5>
-                <Form.Control type="text" value={romanizedText} readOnly className="mb-2" />
-                <Button
-                  variant={copied ? "success" : "outline-success"}
-                  onClick={handleCopy}
-                >
-                  <FontAwesomeIcon icon={faCopy} className="me-2" />
-                  {copied ? "Copied" : "Copy"}
-                </Button>
+                <InputGroup>
+                  <Form.Control type="text" value={romanizedText} readOnly />
+                  <Button variant={copied ? "success" : "outline-success"} onClick={handleCopy}>
+                    <FontAwesomeIcon icon={faCopy} className="me-2" />
+                    {copied ? "Copied" : "Copy"}
+                  </Button>
+                </InputGroup>
                 <p className="mt-2">
                   Character count: <strong>{charCount}</strong>
                 </p>
