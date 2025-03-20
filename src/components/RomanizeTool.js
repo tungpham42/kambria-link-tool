@@ -61,14 +61,14 @@ const RomanizeTool = () => {
   };
 
   return (
-    <Container className="my-4 col-lg-8 col-md-10 col-sm-10 col-12">
+    <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card className="shadow-lg rounded">
-        <Card.Header className="d-flex align-items-center justify-content-center">
-          <h2 className="text-center">Slug Tool</h2>
+        <Card.Header className="d-flex align-items-center justify-content-center bg-dark text-light">
+          <h2 className="text-center m-0">Slug Tool</h2>
           <Button
             variant="link"
             onClick={() => setShowModal(true)}
-            className="ms-2 p-0"
+            className="ms-2 p-0 text-light"
             style={{ textDecoration: "none" }}
           >
             <FontAwesomeIcon icon={faQuestionCircle} size="lg" />
