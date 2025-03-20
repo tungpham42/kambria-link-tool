@@ -63,7 +63,7 @@ const RomanizeTool = () => {
   return (
     <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card className="shadow-lg rounded">
-        <Card.Header className="d-flex align-items-center justify-content-center bg-dark text-light">
+        <Card.Header className="d-flex align-items-center justify-content-center">
           <h2 className="text-center m-0">Slug Tool</h2>
           <Button
             variant="link"
