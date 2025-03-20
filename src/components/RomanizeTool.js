@@ -68,7 +68,7 @@ const RomanizeTool = () => {
           <Button
             variant="link"
             onClick={() => setShowModal(true)}
-            className="ms-2 p-0 text-light"
+            className="ms-2 p-0 text-dark"
             style={{ textDecoration: "none" }}
           >
             <FontAwesomeIcon icon={faQuestionCircle} size="lg" />
