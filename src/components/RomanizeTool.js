@@ -21,6 +21,7 @@ import {
   faCircleExclamation,
   faList,
   faQuestionCircle,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { romanizeString } from "./utils";
 
@@ -151,7 +152,7 @@ const RomanizeTool = () => {
         </Card.Body>
       </Card>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>What is a Slug?</Modal.Title>
         </Modal.Header>
@@ -174,6 +175,7 @@ const RomanizeTool = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
+            <FontAwesomeIcon icon={faTimes} className="me-1" />
             Close
           </Button>
         </Modal.Footer>
