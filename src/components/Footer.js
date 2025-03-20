@@ -6,7 +6,7 @@ import { Container } from "react-bootstrap";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="text-dark pb-1 mt-3">
+    <footer className="text-dark pb-1 mt-4">
       <Container>
         <p className="text-center">
           &copy; {currentYear}{" "}

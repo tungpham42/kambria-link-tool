@@ -12,7 +12,6 @@ import {
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faLink,
   faKeyboard,
   faMagic,
   faCheckCircle,
@@ -62,13 +61,10 @@ const RomanizeTool = () => {
   };
 
   return (
-    <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
+    <Container className="my-4 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card className="shadow-lg rounded">
         <Card.Header className="d-flex align-items-center justify-content-center">
-          <h2 className="text-center mb-0">
-            <FontAwesomeIcon icon={faLink} className="me-2" />
-            Slug Tool
-          </h2>
+          <h2 className="text-center">Slug Tool</h2>
           <Button
             variant="link"
             onClick={() => setShowModal(true)}
