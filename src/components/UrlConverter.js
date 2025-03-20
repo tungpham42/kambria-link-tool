@@ -143,7 +143,7 @@ const UrlConverter = () => {
               {error}
             </Alert>
           )}
-          <Card className="mt-4">
+          <Card className="mt-3">
             <Card.Body className="p-0">
               <h5>
                 <FontAwesomeIcon icon={faList} className="me-2" />
