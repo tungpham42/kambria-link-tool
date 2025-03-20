@@ -146,6 +146,8 @@ const RomanizeTool = () => {
                 <li>"This & That" → "this-that" (9 characters)</li>
                 <li>"Café Olé" → "cafe-ole" (8 characters)</li>
                 <li>"Multiple Spaces" → "multiple-spaces" (15 characters)</li>
+                <li>"こんにちは" → "konnitiha"</li>
+                <li>"안녕하세요" → "annyeonghaseyo"</li>
               </ul>
             </Card.Body>
           </Card>
