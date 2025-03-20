@@ -72,7 +72,7 @@ const UrlConverter = () => {
 
   return (
     <Container className="mb-5 col-lg-8 col-md-10 col-sm-10 col-12">
-      <Card className="shadow-lg rounded">
+      <Card className="shadow rounded">
         <Card.Header className="d-flex align-items-center justify-content-center">
           <h2 className="text-center m-0">URL Converter</h2>
         </Card.Header>
