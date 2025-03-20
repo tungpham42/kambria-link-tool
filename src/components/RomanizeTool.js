@@ -8,6 +8,7 @@ import {
   InputGroup,
   OverlayTrigger,
   Tooltip,
+  Modal,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,6 +20,7 @@ import {
   faCheck,
   faCircleExclamation,
   faList,
+  faQuestionCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { romanizeString } from "./utils";
 
@@ -28,6 +30,7 @@ const RomanizeTool = () => {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
   const [charCount, setCharCount] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,11 +63,19 @@ const RomanizeTool = () => {
   return (
     <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card className="shadow-lg rounded">
-        <Card.Header>
-          <h2 className="text-center">
+        <Card.Header className="d-flex align-items-center justify-content-center">
+          <h2 className="text-center mb-0">
             <FontAwesomeIcon icon={faLink} className="me-2" />
             Slug Tool
           </h2>
+          <Button
+            variant="link"
+            onClick={() => setShowModal(true)}
+            className="ms-2 p-0"
+            style={{ textDecoration: "none" }}
+          >
+            <FontAwesomeIcon icon={faQuestionCircle} size="lg" />
+          </Button>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
@@ -139,6 +150,34 @@ const RomanizeTool = () => {
           </Card>
         </Card.Body>
       </Card>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>What is a Slug?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            A slug is a human-readable, URL-friendly version of a piece of text.
+            It is typically used in web addresses to make them more readable and
+            SEO-friendly and is placed after a domain. Slugs are usually:
+          </p>
+          <ul>
+            <li>Lowercase</li>
+            <li>Use hyphens (-) instead of spaces</li>
+            <li>Contain only alphanumeric characters</li>
+            <li>Remove special characters and accents</li>
+          </ul>
+          <p>
+            For example, a blog post titled "My Awesome Blog Post!" would become
+            "my-awesome-blog-post" as a slug.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
