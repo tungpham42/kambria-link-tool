@@ -22,20 +22,50 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { romanizeString } from "./utils";
 
-const UrlConverter = () => {
+// Translation object
+const translations = {
+  en: {
+    title: "URL Converter",
+    inputLabel: "Enter URL:",
+    placeholder: "e.g. https://cday.kambria.io/cdcg-news",
+    convertButton: "Convert URL",
+    resultLabel: "Result:",
+    examplesLabel: "Examples:",
+    errorMessage:
+      'Invalid URL format. URL must start with https://cday.kambria.io/ followed by either "knth-" or "cdcg-"',
+    copyTooltip: "Copy",
+    copiedTooltip: "Copied!",
+    openLinkTooltip: "Open link",
+  },
+  vi: {
+    title: "Công cụ chuyển đổi URL",
+    inputLabel: "Nhập URL:",
+    placeholder: "ví dụ: https://cday.kambria.io/cdcg-news",
+    convertButton: "Chuyển đổi URL",
+    resultLabel: "Kết quả:",
+    examplesLabel: "Ví dụ:",
+    errorMessage:
+      'Định dạng URL không hợp lệ. URL phải bắt đầu bằng https://cday.kambria.io/ theo sau là "knth-" hoặc "cdcg-"',
+    copyTooltip: "Sao chép",
+    copiedTooltip: "Đã sao chép!",
+    openLinkTooltip: "Mở liên kết",
+  },
+};
+
+const UrlConverter = ({ language }) => {
   const [inputUrl, setInputUrl] = useState("");
   const [convertedUrl, setConvertedUrl] = useState("");
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+
+  const t = translations[language];
 
   const convertUrl = (url) => {
     const urlPattern = /^https:\/\/cday\.kambria\.io\/(knth|cdcg)-(.*)$/;
     const matches = url.match(urlPattern);
 
     if (!matches) {
-      throw new Error(
-        'Invalid URL format. URL must start with https://cday.kambria.io/ followed by either "knth-" or "cdcg-"'
-      );
+      throw new Error(t.errorMessage);
     }
 
     const [, prefix, content] = matches;
@@ -74,25 +104,25 @@ const UrlConverter = () => {
     <Container className="mb-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card className="shadow rounded">
         <Card.Header className="d-flex align-items-center justify-content-center">
-          <h2 className="text-center m-0">URL Converter</h2>
+          <h2 className="text-center m-0">{t.title}</h2>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-2">
               <Form.Label className="h5">
                 <FontAwesomeIcon icon={faLink} className="me-2" />
-                Enter URL:
+                {t.inputLabel}
               </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="e.g. https://cday.kambria.io/cdcg-news"
+                placeholder={t.placeholder}
                 value={inputUrl}
                 onChange={(e) => setInputUrl(e.target.value)}
                 autoFocus
               />
               <Button variant="primary" type="submit" className="w-100 mt-2">
                 <FontAwesomeIcon icon={faArrowRight} className="me-2" />
-                Convert URL
+                {t.convertButton}
               </Button>
             </Form.Group>
           </Form>
@@ -102,7 +132,7 @@ const UrlConverter = () => {
               <Card.Body className="p-0">
                 <h5>
                   <FontAwesomeIcon icon={faCheckCircle} className="me-2" />
-                  Result:
+                  {t.resultLabel}
                 </h5>
                 <InputGroup>
                   <Form.Control
@@ -112,7 +142,11 @@ const UrlConverter = () => {
                   />
                   <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip>{copied ? "Copied!" : "Copy"}</Tooltip>}
+                    overlay={
+                      <Tooltip>
+                        {copied ? t.copiedTooltip : t.copyTooltip}
+                      </Tooltip>
+                    }
                   >
                     <Button variant="outline-secondary" onClick={handleCopy}>
                       <FontAwesomeIcon icon={copied ? faCheck : faCopy} />
@@ -120,7 +154,7 @@ const UrlConverter = () => {
                   </OverlayTrigger>
                   <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip>Open link</Tooltip>}
+                    overlay={<Tooltip>{t.openLinkTooltip}</Tooltip>}
                   >
                     <Button
                       variant="outline-secondary"
@@ -144,7 +178,7 @@ const UrlConverter = () => {
             <Card.Body className="p-0">
               <h5>
                 <FontAwesomeIcon icon={faList} className="me-2" />
-                Examples:
+                {t.examplesLabel}
               </h5>
               <ul>
                 <li>

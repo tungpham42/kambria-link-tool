@@ -24,7 +24,57 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { romanizeString } from "./utils";
 
-const RomanizeTool = () => {
+// Translation object
+const translations = {
+  en: {
+    title: "Slug Tool",
+    inputLabel: "Input the text:",
+    convertButton: "Convert to Slug",
+    errorMessage: "Please enter some text!",
+    resultLabel: "Result:",
+    charCount: "Character count:",
+    examplesLabel: "Examples:",
+    modalTitle: "What is a Slug?",
+    modalBody1:
+      "A slug is a human-readable, URL-friendly version of a piece of text. It is typically used in web addresses to make them more readable and SEO-friendly and is placed after a domain. Slugs are usually:",
+    modalList: [
+      "Lowercase",
+      "Use hyphens (-) instead of spaces",
+      "Contain only alphanumeric characters",
+      "Remove special characters and accents",
+    ],
+    modalBody2:
+      'For example, a blog post titled "My Awesome Blog Post!" would become "my-awesome-blog-post" as a slug.',
+    closeButton: "Close",
+    copyTooltip: "Copy",
+    copiedTooltip: "Copied!",
+  },
+  vi: {
+    title: "Công cụ tạo Slug",
+    inputLabel: "Nhập văn bản:",
+    convertButton: "Chuyển thành Slug",
+    errorMessage: "Vui lòng nhập một số văn bản!",
+    resultLabel: "Kết quả:",
+    charCount: "Số ký tự:",
+    examplesLabel: "Ví dụ:",
+    modalTitle: "Slug là gì?",
+    modalBody1:
+      "Slug là phiên bản thân thiện với URL, dễ đọc của một đoạn văn bản. Nó thường được sử dụng trong địa chỉ web để làm cho chúng dễ đọc hơn và tối ưu hóa SEO, được đặt sau tên miền. Slug thường:",
+    modalList: [
+      "Viết thường",
+      "Sử dụng dấu gạch nối (-) thay cho khoảng trắng",
+      "Chỉ chứa ký tự chữ và số",
+      "Loại bỏ ký tự đặc biệt và dấu",
+    ],
+    modalBody2:
+      'Ví dụ, một bài đăng blog có tiêu đề "My Awesome Blog Post!" sẽ trở thành "my-awesome-blog-post" dưới dạng slug.',
+    closeButton: "Đóng",
+    copyTooltip: "Sao chép",
+    copiedTooltip: "Đã sao chép!",
+  },
+};
+
+const RomanizeTool = ({ language }) => {
   const [inputText, setInputText] = useState("");
   const [romanizedText, setRomanizedText] = useState("");
   const [copied, setCopied] = useState(false);
@@ -32,10 +82,12 @@ const RomanizeTool = () => {
   const [charCount, setCharCount] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
+  const t = translations[language];
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!inputText.trim()) {
-      setError("Please enter some text!");
+      setError(t.errorMessage);
       setRomanizedText("");
       setCharCount(0);
       return;
@@ -63,12 +115,12 @@ const RomanizeTool = () => {
   return (
     <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card className="shadow rounded">
-        <Card.Header className="d-flex align-items-center justify-content-center">
-          <h2 className="text-center m-0">Slug Tool</h2>
+        <Card.Header className="d-flex align-items-center justify-content-between">
+          <h2 className="text-center m-0">{t.title}</h2>
           <Button
             variant="link"
             onClick={() => setShowModal(true)}
-            className="ms-2 p-0 text-dark"
+            className="p-0 text-dark"
             style={{ textDecoration: "none" }}
           >
             <FontAwesomeIcon icon={faQuestionCircle} size="lg" />
@@ -79,17 +131,17 @@ const RomanizeTool = () => {
             <Form.Group className="mb-3">
               <Form.Label className="h5">
                 <FontAwesomeIcon icon={faKeyboard} className="me-2" />
-                Input the text:
+                {t.inputLabel}
               </Form.Label>
               <Form.Control
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="Enter text here"
+                placeholder={t.inputLabel}
               />
               <Button variant="primary" type="submit" className="w-100 mt-2">
                 <FontAwesomeIcon icon={faMagic} className="me-2" />
-                Convert to Slug
+                {t.convertButton}
               </Button>
             </Form.Group>
           </Form>
@@ -106,7 +158,7 @@ const RomanizeTool = () => {
               <Card.Body className="p-0">
                 <h5>
                   <FontAwesomeIcon icon={faCheckCircle} className="me-2" />
-                  Result:
+                  {t.resultLabel}
                 </h5>
                 <InputGroup>
                   <Form.Control
@@ -116,7 +168,11 @@ const RomanizeTool = () => {
                   />
                   <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip>{copied ? "Copied!" : "Copy"}</Tooltip>}
+                    overlay={
+                      <Tooltip>
+                        {copied ? t.copiedTooltip : t.copyTooltip}
+                      </Tooltip>
+                    }
                   >
                     <Button variant="outline-secondary" onClick={handleCopy}>
                       <FontAwesomeIcon icon={copied ? faCheck : faCopy} />
@@ -124,7 +180,7 @@ const RomanizeTool = () => {
                   </OverlayTrigger>
                 </InputGroup>
                 <p className="mt-2">
-                  Character count: <strong>{charCount}</strong>
+                  {t.charCount} <strong>{charCount}</strong>
                 </p>
               </Card.Body>
             </Card>
@@ -134,7 +190,7 @@ const RomanizeTool = () => {
             <Card.Body className="p-0">
               <h5>
                 <FontAwesomeIcon icon={faList} className="me-2" />
-                Examples:
+                {t.examplesLabel}
               </h5>
               <ul>
                 <li>"Xin chào!" → "xin-chao" (8 characters)</li>
@@ -152,29 +208,21 @@ const RomanizeTool = () => {
 
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>What is a Slug?</Modal.Title>
+          <Modal.Title>{t.modalTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            A slug is a human-readable, URL-friendly version of a piece of text.
-            It is typically used in web addresses to make them more readable and
-            SEO-friendly and is placed after a domain. Slugs are usually:
-          </p>
+          <p>{t.modalBody1}</p>
           <ul>
-            <li>Lowercase</li>
-            <li>Use hyphens (-) instead of spaces</li>
-            <li>Contain only alphanumeric characters</li>
-            <li>Remove special characters and accents</li>
+            {t.modalList.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
-          <p>
-            For example, a blog post titled "My Awesome Blog Post!" would become
-            "my-awesome-blog-post" as a slug.
-          </p>
+          <p>{t.modalBody2}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             <FontAwesomeIcon icon={faTimes} className="me-1" />
-            Close
+            {t.closeButton}
           </Button>
         </Modal.Footer>
       </Modal>
