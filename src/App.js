@@ -42,10 +42,16 @@ const App = () => {
             <FontAwesomeIcon icon={faGlobe} size="lg" />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item onClick={() => setLanguage("vi")}>
+            <Dropdown.Item
+              onClick={() => setLanguage("vi")}
+              active={language === "vi"}
+            >
               Tiếng Việt
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => setLanguage("en")}>
+            <Dropdown.Item
+              onClick={() => setLanguage("en")}
+              active={language === "en"}
+            >
               English
             </Dropdown.Item>
           </Dropdown.Menu>
