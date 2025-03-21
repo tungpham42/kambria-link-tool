@@ -55,7 +55,7 @@ const translations = {
     inputLabel: "Nhập văn bản:",
     inputPlaceholder: "Nhập vào văn bản cần chuyển",
     convertButton: "Chuyển thành Slug",
-    errorMessage: "Vui lòng nhập một số văn bản!",
+    errorMessage: "Vui lòng nhập văn bản!",
     resultLabel: "Kết quả:",
     charCount: "Số ký tự:",
     examplesLabel: "Ví dụ:",
