@@ -115,8 +115,8 @@ const RomanizeTool = ({ language }) => {
   return (
     <Container className="my-5 col-lg-8 col-md-10 col-sm-10 col-12">
       <Card className="shadow rounded">
-        <Card.Header className="d-flex align-items-center justify-content-between">
-          <h2 className="text-center m-0">{t.title}</h2>
+        <Card.Header className="d-flex align-items-center justify-content-center">
+          <h2 className="text-center m-0 me-2">{t.title}</h2>
           <Button
             variant="link"
             onClick={() => setShowModal(true)}
