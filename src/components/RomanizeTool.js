@@ -29,6 +29,7 @@ const translations = {
   en: {
     title: "Slug Tool",
     inputLabel: "Input the text:",
+    inputPlaceholder: "Input the text you want to convert",
     convertButton: "Convert to Slug",
     errorMessage: "Please enter some text!",
     resultLabel: "Result:",
@@ -52,6 +53,7 @@ const translations = {
   vi: {
     title: "Công cụ tạo Slug",
     inputLabel: "Nhập văn bản:",
+    inputPlaceholder: "Nhập vào văn bản cần chuyển",
     convertButton: "Chuyển thành Slug",
     errorMessage: "Vui lòng nhập một số văn bản!",
     resultLabel: "Kết quả:",
@@ -137,7 +139,7 @@ const RomanizeTool = ({ language }) => {
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder={t.inputLabel}
+                placeholder={t.inputPlaceholder}
               />
               <Button variant="primary" type="submit" className="w-100 mt-2">
                 <FontAwesomeIcon icon={faMagic} className="me-2" />
