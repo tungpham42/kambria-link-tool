@@ -49,6 +49,7 @@ const translations = {
     closeButton: "Close",
     copyTooltip: "Copy",
     copiedTooltip: "Copied!",
+    characters: "characters",
   },
   vi: {
     title: "Công cụ tạo Slug",
@@ -73,6 +74,7 @@ const translations = {
     closeButton: "Đóng",
     copyTooltip: "Sao chép",
     copiedTooltip: "Đã sao chép!",
+    characters: "ký tự",
   },
 };
 
@@ -195,13 +197,15 @@ const RomanizeTool = ({ language }) => {
                 {t.examplesLabel}
               </h5>
               <ul>
-                <li>"Xin chào!" → "xin-chao" (8 characters)</li>
-                <li>"Hello World!" → "hello-world" (11 characters)</li>
-                <li>"This & That" → "this-that" (9 characters)</li>
-                <li>"Café Olé" → "cafe-ole" (8 characters)</li>
-                <li>"Multiple Spaces" → "multiple-spaces" (15 characters)</li>
-                <li>"こんにちは" → "konnitiha" (9 characters)</li>
-                <li>"안녕하세요" → "annyeonghaseyo" (14 characters)</li>
+                <li>"Xin chào!" → "xin-chao" (8 {t.characters})</li>
+                <li>"Hello World!" → "hello-world" (11 {t.characters})</li>
+                <li>"This & That" → "this-that" (9 {t.characters})</li>
+                <li>"Café Olé" → "cafe-ole" (8 {t.characters})</li>
+                <li>
+                  "Multiple Spaces" → "multiple-spaces" (15 {t.characters})
+                </li>
+                <li>"こんにちは" → "konnitiha" (9 {t.characters})</li>
+                <li>"안녕하세요" → "annyeonghaseyo" (14 {t.characters})</li>
               </ul>
             </Card.Body>
           </Card>
