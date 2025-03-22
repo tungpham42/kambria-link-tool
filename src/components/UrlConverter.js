@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Form,
@@ -45,7 +45,7 @@ const translations = {
     resultLabel: "Kết quả:",
     examplesLabel: "Ví dụ:",
     errorMessage:
-      'Định dạng URL không hợp lệ. URL phải bắt đầu bằng https://cday.kambria.io/ theo sau là "knth-" hoặc "cdcg-"',
+      'Định dạng URL sai. URL phải bắt đầu bằng https://cday.kambria.io/ theo sau là "knth-" hoặc "cdcg-"',
     copyTooltip: "Sao chép",
     copiedTooltip: "Đã sao chép!",
     openLinkTooltip: "Mở liên kết",
@@ -59,6 +59,12 @@ const UrlConverter = ({ language }) => {
   const [copied, setCopied] = useState(false);
 
   const t = translations[language];
+
+  useEffect(() => {
+    if (error) {
+      setError(t.errorMessage); // Update error message when language changes
+    }
+  }, [t.errorMessage, error]);
 
   const convertUrl = (url) => {
     const urlPattern = /^https:\/\/cday\.kambria\.io\/(knth|cdcg)-(.*)$/;

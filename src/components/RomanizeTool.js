@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Form,
@@ -87,6 +87,12 @@ const RomanizeTool = ({ language }) => {
   const [showModal, setShowModal] = useState(false);
 
   const t = translations[language];
+
+  useEffect(() => {
+    if (error) {
+      setError(t.errorMessage); // Update error message when language changes
+    }
+  }, [t.errorMessage, error]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
