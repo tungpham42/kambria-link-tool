@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Footer from "./components/Footer";
 import UrlConverter from "./components/UrlConverter";
 import RomanizeTool from "./components/RomanizeTool";
 import { Dropdown } from "react-bootstrap";
@@ -59,7 +58,6 @@ const App = () => {
       </div>
       <UrlConverter language={language} />
       <RomanizeTool language={language} />
-      <Footer />
     </>
   );
 };
